@@ -102,11 +102,11 @@ public class UserInterface extends JFrame implements ActionListener {
         String resultString = null;
         String firstP = firstPolynomialTextField.getText();
         String secondP = secondPolynomialTextField.getText();
-        Polynomial p = new Polynomial(), p1 = new Polynomial(), p2 = new Polynomial(), operationResult = new Polynomial();
+        Polynomial p1 = new Polynomial(), p2 = new Polynomial(), operationResult = new Polynomial();
 
         if (!firstP.isEmpty()){
             if(validateInput(firstPolynomialTextField.getText()) == 1)
-                p1 = p.createPolynomialFromString(firstP);
+                p1 = Polynomial.createPolynomialFromString(firstP);
             else{
                 System.out.println("The first polynomial is invalid!");
                 showErrorDialog("The first polynomial is invalid!");
@@ -115,7 +115,7 @@ public class UserInterface extends JFrame implements ActionListener {
         }
         if (!secondP.isEmpty()){
             if(validateInput(secondPolynomialTextField.getText()) == 1)
-                p2 = p.createPolynomialFromString(secondP);
+                p2 = Polynomial.createPolynomialFromString(secondP);
             else{
                 System.out.println("The second polynomial is invalid!");
                 showErrorDialog("The second polynomial is invalid!");

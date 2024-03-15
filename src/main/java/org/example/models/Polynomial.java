@@ -63,7 +63,7 @@ public class Polynomial {
         return string;
     }
 
-    public Polynomial createPolynomialFromString(String input) { //create a polynomial from a string representation
+    public static Polynomial createPolynomialFromString(String input) { //create a polynomial from a string representation
         Polynomial polynom = new Polynomial();
         Pattern pattern = Pattern.compile("([+-]?(?:\\d+\\.?\\d*)?x\\^?\\d*|[+-]?\\d+\\.?\\d*)"); // define pattern to match polynomial terms
         Matcher matcher = pattern.matcher(input);

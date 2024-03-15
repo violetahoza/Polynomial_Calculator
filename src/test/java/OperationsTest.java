@@ -13,8 +13,8 @@ public class OperationsTest {
     public void addTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial(), sum = new Polynomial();
 
-        p1 = p1.createPolynomialFromString("2x^2-3x+2");
-        p2 = p2.createPolynomialFromString("x^3+3x");
+        p1 = Polynomial.createPolynomialFromString("2x^2-3x+2");
+        p2 = Polynomial.createPolynomialFromString("x^3+3x");
         sum = Operations.add(p1, p2);
         String result = sum.polynomialToString();
 
@@ -25,8 +25,8 @@ public class OperationsTest {
     public void subtractTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial(), subtract = new Polynomial();
 
-        p1 = p1.createPolynomialFromString("2x^2-3x+2");
-        p2 = p2.createPolynomialFromString("x^3+3x");
+        p1 = Polynomial.createPolynomialFromString("2x^2-3x+2");
+        p2 = Polynomial.createPolynomialFromString("x^3+3x");
         subtract = Operations.subtract(p1, p2);
         String result = subtract.polynomialToString();
 
@@ -37,8 +37,8 @@ public class OperationsTest {
     public void multiplyTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial(), product = new Polynomial();
 
-        p1 = p1.createPolynomialFromString("x+1");
-        p2 = p2.createPolynomialFromString("x-1");
+        p1 = Polynomial.createPolynomialFromString("x+1");
+        p2 = Polynomial.createPolynomialFromString("x-1");
         product = Operations.multiply(p1, p2);
         String result = product.polynomialToString();
 
@@ -49,8 +49,8 @@ public class OperationsTest {
     public void divideTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial();
 
-        p1 = p1.createPolynomialFromString("x^4");
-        p2 = p2.createPolynomialFromString("x");
+        p1 = Polynomial.createPolynomialFromString("x^4");
+        p2 = Polynomial.createPolynomialFromString("x");
         ArrayList result = Operations.divide(p1, p2);
         Polynomial q = (Polynomial) result.getFirst();
         Polynomial r = (Polynomial) result.getLast();
@@ -62,7 +62,7 @@ public class OperationsTest {
     public void integrateTest(){
         Polynomial p1 = new Polynomial(), integral = new Polynomial();
 
-        p1 = p1.createPolynomialFromString("3x^2-2x+2");
+        p1 = Polynomial.createPolynomialFromString("3x^2-2x+2");
         integral = Operations.integrate(p1);
         String result = integral.polynomialToString();
 
@@ -73,7 +73,7 @@ public class OperationsTest {
     public void derivateTest(){
         Polynomial p1 = new Polynomial(), derivative = new Polynomial();
 
-        p1 = p1.createPolynomialFromString("3x^2-2x+2");
+        p1 = Polynomial.createPolynomialFromString("3x^2-2x+2");
         derivative = Operations.derivative(p1);
         String result = derivative.polynomialToString();
 
