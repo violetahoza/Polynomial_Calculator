@@ -11,7 +11,7 @@ import java.util.TreeMap;
 
 public class Operations {
     // method to add two polynomials
-    public Polynomial add(Polynomial p1, Polynomial p2) {
+    public static Polynomial add(Polynomial p1, Polynomial p2) {
         // initialize a polynomial to store the sum
         Polynomial sum = new Polynomial();
 
@@ -40,7 +40,7 @@ public class Operations {
     }
 
     // method to subtract two polynomials
-    public Polynomial subtract(Polynomial p1, Polynomial p2) {
+    public static Polynomial subtract(Polynomial p1, Polynomial p2) {
         Polynomial difference = new Polynomial();
         if(p1.equals(p2)){
             difference.addMonom(0, 0);
@@ -70,7 +70,7 @@ public class Operations {
     }
 
     //method to multiply two polynomials
-    public Polynomial multiply(Polynomial p1, Polynomial p2) {
+    public static Polynomial multiply(Polynomial p1, Polynomial p2) {
         Polynomial product = new Polynomial();
 
         for(Map.Entry<Integer, Double> entry1 : p1.getPolynomial().entrySet()) // iterate over the entries of p1
@@ -98,7 +98,7 @@ public class Operations {
         }
         return product;
     }
-    public ArrayList<Polynomial> divide(Polynomial p1, Polynomial p2) {
+    public static ArrayList<Polynomial> divide(Polynomial p1, Polynomial p2) {
         // initialize a polynomial to store the quotient and one to store the dividend
         Polynomial quotient = new Polynomial();
         Polynomial dividend = new Polynomial();
@@ -145,7 +145,7 @@ public class Operations {
     }
 
     // method to compute the derivative of a polynomial
-    public Polynomial derivative(Polynomial polynomial){
+    public static Polynomial derivative(Polynomial polynomial){
         Polynomial derivative = new Polynomial();
         for (Map.Entry<Integer, Double> entry : polynomial.getPolynomial().entrySet()) {
             int power = entry.getKey();
@@ -157,7 +157,7 @@ public class Operations {
     }
 
     // method to compute the integral of a polynomial
-    public Polynomial integrate(Polynomial polynomial){
+    public static Polynomial integrate(Polynomial polynomial){
         Polynomial integral = new Polynomial();
         for (Map.Entry<Integer, Double> entry : polynomial.getPolynomial().entrySet()) {
             int power = entry.getKey();
