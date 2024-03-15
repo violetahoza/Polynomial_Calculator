@@ -131,9 +131,13 @@ public class UserInterface extends JFrame implements ActionListener {
                 System.out.println("Please enter both polynomials.");
             }
         if (source == derivationButton || source == integrationButton)
+        {
             if (firstP.isEmpty()) {
-                System.out.println("Please enter the polynomial");
+                System.out.println("Please enter the first polynomial.");
             }
+            if(secondP.isEmpty())
+                System.out.println("Please enter the second polynomial.");
+        }
 
         if (source == addButton) {
             operationResult = operation.add(p1, p2);
@@ -150,12 +154,22 @@ public class UserInterface extends JFrame implements ActionListener {
         if (source == divisionButton) {
             resultString = operation.divide(p1, p2);
         }
-        if (source == derivationButton) {
-            operationResult = operation.derivative(p1);
+        if (source == derivationButton) { //if only a polynomial is given, derivate that one
+            if(secondP.isEmpty() && !firstP.isEmpty())
+                operationResult = operation.derivative(p1);
+            else if(!secondP.isEmpty() && firstP.isEmpty())
+                operationResult = operation.derivative(p2);
+            else if (!secondP.isEmpty() && !firstP.isEmpty())//if both polynomials are given, derivate the first one
+                operationResult = operation.derivative(p1);
             resultString = operationResult.polynomialToString();
         }
         if (source == integrationButton) {
-            operationResult = operation.integrate(p1);
+            if(secondP.isEmpty() && !firstP.isEmpty())
+                operationResult = operation.integrate(p1);
+            else if(!secondP.isEmpty() && firstP.isEmpty())
+                operationResult = operation.integrate(p2);
+            else if (!secondP.isEmpty() && !firstP.isEmpty()) //if both polynomials are given, integrate the first one
+                operationResult = operation.integrate(p1);
             resultString = operationResult.polynomialToString();
         }
         resultTextField.setText(resultString);
@@ -165,7 +179,7 @@ public class UserInterface extends JFrame implements ActionListener {
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
             // Check if the character is not 'x', '+', '-', or a digit from 0 to 9
-            if (ch != 'x' && ch != '+' && ch != '^' && ch != '-' && !Character.isDigit(ch)) {
+            if (ch != 'x' && ch != '+' && ch != '^' && ch != '-' && ch != ' ' && !Character.isDigit(ch)) {
                 return 0;
             }
         }
