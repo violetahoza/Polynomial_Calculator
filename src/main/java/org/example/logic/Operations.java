@@ -108,12 +108,12 @@ public class Operations {
         if (p2.getPolynomial().isEmpty() || p2.getPolynomial().containsValue(0.0) || p1.getPolynomial().isEmpty() || p1.getPolynomial().containsValue(0.0)) {
             UserInterface userInterface = new UserInterface("Polynomial calculator");
             userInterface.showErrorDialog("Division by zero is not allowed.");
-            throw new ArithmeticException("Division by zero is not allowed.");   // check if the polynomials are empty or zero
+            throw new ArithmeticException("Division by zero is not allowed."); // check if the polynomials are empty or zero
         }
 
         // find the maximum power in both polynomials
-        Integer kmax1 = Collections.max(p1.getPolynomial().entrySet(), Map.Entry.comparingByValue()).getKey();
-        Integer kmax2 = Collections.max(p2.getPolynomial().entrySet(), Map.Entry.comparingByValue()).getKey();
+        Integer kmax1 = Collections.max(p1.getPolynomial().entrySet(), Map.Entry.comparingByKey()).getKey();
+        Integer kmax2 = Collections.max(p2.getPolynomial().entrySet(), Map.Entry.comparingByKey()).getKey();
 
         if(kmax1 >= kmax2) {  // determine which polynomial will be used as the dividend based on the maximum powers
             dividend.getPolynomial().putAll(p1.getPolynomial());
@@ -125,8 +125,8 @@ public class Operations {
 
         while (dividend.getPolynomial().size() >= divisor.getPolynomial().size()) {
             // find the leading terms of the dividend and divisor (the terms with the greatest power)
-            Map.Entry<Integer, Double> leadDividend = dividend.getPolynomial().entrySet().iterator().next();
-            Map.Entry<Integer, Double> leadDivisor = divisor.getPolynomial().entrySet().iterator().next();
+            Map.Entry<Integer, Double> leadDividend = Collections.max(dividend.getPolynomial().entrySet(), Map.Entry.comparingByKey());
+            Map.Entry<Integer, Double> leadDivisor = Collections.max(divisor.getPolynomial().entrySet(), Map.Entry.comparingByKey());
 
             // calculate the difference in powers and the coefficient of the quotient
             int powerDifference = leadDividend.getKey() - leadDivisor.getKey();

@@ -49,8 +49,8 @@ public class OperationsFailed {
     public void divideTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial();
 
-        p1 = p1.createPolynomialFromString("x");
-        p2 = p2.createPolynomialFromString("x");
+        p1 = p1.createPolynomialFromString("x^3-2x^2+x+8");
+        p2 = p2.createPolynomialFromString("x-1");
         ArrayList result = Operations.divide(p1, p2);
         Polynomial q = (Polynomial) result.getFirst();
         Polynomial r = (Polynomial) result.getLast();

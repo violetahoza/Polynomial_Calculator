@@ -147,12 +147,12 @@ public class UserInterface extends JFrame implements ActionListener {
             ArrayList<Polynomial> result = Operations.divide(p1, p2);
             resultString = "Quotient: " + result.getFirst().polynomialToString()  + " Remainder: " + result.getLast().polynomialToString();
         }
-        if (source == derivationButton) { //if only a polynomial is given, derivate that one
+        if (source == derivationButton) { //if only a polynomial is given, derive that one
             if(secondP.isEmpty() && !firstP.isEmpty())
                 operationResult = Operations.derivative(p1);
             else if(!secondP.isEmpty() && firstP.isEmpty())
                 operationResult = Operations.derivative(p2);
-            else if (!secondP.isEmpty() && !firstP.isEmpty())//if both polynomials are given, derivate the first one
+            else if (!secondP.isEmpty() && !firstP.isEmpty())//if both polynomials are given, derive the first one
                 operationResult = Operations.derivative(p1);
             resultString = operationResult.polynomialToString();
         }
