@@ -3,6 +3,8 @@ package org.example.logic;
 import org.example.GUI.UserInterface;
 import org.example.models.Polynomial;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
@@ -96,11 +98,12 @@ public class Operations {
         }
         return product;
     }
-    public String divide(Polynomial p1, Polynomial p2) {
+    public ArrayList<Polynomial> divide(Polynomial p1, Polynomial p2) {
         // initialize a polynomial to store the quotient and one to store the dividend
         Polynomial quotient = new Polynomial();
         Polynomial dividend = new Polynomial();
         Polynomial divisor = new Polynomial();
+        ArrayList<Polynomial> result = new ArrayList<Polynomial>();
 
         if (p2.getPolynomial().isEmpty() || p2.getPolynomial().containsValue(0.0) || p1.getPolynomial().isEmpty() || p1.getPolynomial().containsValue(0.0)) {
             UserInterface userInterface = new UserInterface("Polynomial calculator");
@@ -135,7 +138,9 @@ public class Operations {
             Polynomial product = multiply(divisor, temp);// multiply the divisor by the quotient term
             dividend = subtract(dividend, product);// subtract the product from the dividend
         }
-        String result = "Quotient: " + quotient.polynomialToString() + " Remainder: " + dividend.polynomialToString(); // construct the result string containing both quotient and remainder
+        //String result = "Quotient: " + quotient.polynomialToString() + " Remainder: " + dividend.polynomialToString(); // construct the result string containing both quotient and remainder
+        result.add(quotient);
+        result.add(dividend);
         return result;
     }
 

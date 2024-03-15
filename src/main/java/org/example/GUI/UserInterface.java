@@ -4,6 +4,7 @@ import org.example.models.Polynomial;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
 public class UserInterface extends JFrame implements ActionListener {
@@ -152,7 +153,8 @@ public class UserInterface extends JFrame implements ActionListener {
             resultString = operationResult.polynomialToString();
         }
         if (source == divisionButton) {
-            resultString = operation.divide(p1, p2);
+            ArrayList<Polynomial> result = operation.divide(p1, p2);
+            resultString = "Quotient: " + result.getFirst().polynomialToString()  + " Remainder: " + result.getLast().polynomialToString();
         }
         if (source == derivationButton) { //if only a polynomial is given, derivate that one
             if(secondP.isEmpty() && !firstP.isEmpty())
@@ -178,7 +180,7 @@ public class UserInterface extends JFrame implements ActionListener {
     private int validateInput(String input) {
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
-            // Check if the character is not 'x', '+', '-', or a digit from 0 to 9
+            // Check if the character is not 'x', '+', '-', a space, or a digit from 0 to 9
             if (ch != 'x' && ch != '+' && ch != '^' && ch != '-' && ch != ' ' && !Character.isDigit(ch)) {
                 return 0;
             }

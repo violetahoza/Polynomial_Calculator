@@ -2,6 +2,10 @@ import org.example.logic.Operations;
 import org.example.models.Polynomial;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OperationsTest {
@@ -51,7 +55,7 @@ public class OperationsTest {
 
         p1 = p1.createPolynomialFromString("x^4");
         p2 = p2.createPolynomialFromString("x");
-        String result = op.divide(p1, p2);
+        ArrayList result = op.divide(p1, p2);
         assertEquals (result, "Quotient: x^3 Remainder: 0");
     }
 
