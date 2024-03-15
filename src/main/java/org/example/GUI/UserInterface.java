@@ -103,7 +103,6 @@ public class UserInterface extends JFrame implements ActionListener {
         String firstP = firstPolynomialTextField.getText();
         String secondP = secondPolynomialTextField.getText();
         Polynomial p = new Polynomial(), p1 = new Polynomial(), p2 = new Polynomial(), operationResult = new Polynomial();
-        Operations operation = new Operations();
 
         if (!firstP.isEmpty()){
             if(validateInput(firstPolynomialTextField.getText()) == 1)
@@ -133,37 +132,37 @@ public class UserInterface extends JFrame implements ActionListener {
                 System.out.println("Please enter at least one polynomial.");
 
         if (source == addButton) {
-            operationResult = operation.add(p1, p2);
+            operationResult = Operations.add(p1, p2);
             resultString = operationResult.polynomialToString();
         }
         if (source == subtractButton) {
-            operationResult = operation.subtract(p1, p2);
+            operationResult = Operations.subtract(p1, p2);
             resultString = operationResult.polynomialToString();
         }
         if (source == multiplyButton) {
-            operationResult = operation.multiply(p1, p2);
+            operationResult = Operations.multiply(p1, p2);
             resultString = operationResult.polynomialToString();
         }
         if (source == divisionButton) {
-            ArrayList<Polynomial> result = operation.divide(p1, p2);
+            ArrayList<Polynomial> result = Operations.divide(p1, p2);
             resultString = "Quotient: " + result.getFirst().polynomialToString()  + " Remainder: " + result.getLast().polynomialToString();
         }
         if (source == derivationButton) { //if only a polynomial is given, derivate that one
             if(secondP.isEmpty() && !firstP.isEmpty())
-                operationResult = operation.derivative(p1);
+                operationResult = Operations.derivative(p1);
             else if(!secondP.isEmpty() && firstP.isEmpty())
-                operationResult = operation.derivative(p2);
+                operationResult = Operations.derivative(p2);
             else if (!secondP.isEmpty() && !firstP.isEmpty())//if both polynomials are given, derivate the first one
-                operationResult = operation.derivative(p1);
+                operationResult = Operations.derivative(p1);
             resultString = operationResult.polynomialToString();
         }
         if (source == integrationButton) {
             if(secondP.isEmpty() && !firstP.isEmpty())
-                operationResult = operation.integrate(p1);
+                operationResult = Operations.integrate(p1);
             else if(!secondP.isEmpty() && firstP.isEmpty())
-                operationResult = operation.integrate(p2);
+                operationResult = Operations.integrate(p2);
             else if (!secondP.isEmpty() && !firstP.isEmpty()) //if both polynomials are given, integrate the first one
-                operationResult = operation.integrate(p1);
+                operationResult = Operations.integrate(p1);
             resultString = operationResult.polynomialToString();
         }
         resultTextField.setText(resultString);
