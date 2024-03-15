@@ -74,21 +74,21 @@ public class Polynomial {
 
             String term = matcher.group(1); // the input string is separated in monomials ; for input string x^2+2x-3, there are 3 matches of 1 group: x^2, +2x and -3
 
-                if (term.contains("x")) { //if the term contains 'x'
-                    String[] parts = term.split("x");
-                    if (parts.length > 0) {
-                        if (parts[0].isEmpty()) coefficient = 1; //if the coefficient part is empty, set it to
-                        else if (parts[0].equals("-")) {
-                            coefficient = -1;
-                        } else if (parts[0].equals("+")) {
-                            coefficient = 1;
-                        } else if (!parts[0].isEmpty()) {
-                            coefficient = parseDouble(parts[0]); //parse the coefficient
-                        }
-                    } else if (parts.length == 0) coefficient = 1; // if term contains only 'x', set coefficient to 1
-                    if (term.contains("^")) {
-                        power = Integer.parseInt(term.split("\\^")[1]); //extract power part
-                    } else { //if the power part is not present
+            if (term.contains("x")) { //if the term contains 'x'
+                String[] parts = term.split("x");
+                if (parts.length > 0) {
+                    if (parts[0].isEmpty()) coefficient = 1; //if the coefficient part is empty, set it to
+                    else if (parts[0].equals("-")) {
+                        coefficient = -1;
+                    } else if (parts[0].equals("+")) {
+                        coefficient = 1;
+                    } else if (!parts[0].isEmpty()) {
+                        coefficient = parseDouble(parts[0]); //parse the coefficient
+                    }
+                } else if (parts.length == 0) coefficient = 1; // if term contains only 'x', set coefficient to 1
+                if (term.contains("^")) {
+                    power = Integer.parseInt(term.split("\\^")[1]); //extract power part
+                } else { //if the power part is not present
                         power = 1;
                     }
                 } else { // if the term doesn't contain 'x', parse it as a coefficient

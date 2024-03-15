@@ -60,7 +60,6 @@ public class UserInterface extends JFrame implements ActionListener {
     private void prepareNumbersPanel() {
         this.numbersPanel.setBackground(new Color(220, 200, 250));
         this.numbersPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
         JPanel polynomialsPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         polynomialsPanel.setBackground(new Color(220, 200, 250));
 
@@ -77,7 +76,6 @@ public class UserInterface extends JFrame implements ActionListener {
 
         this.numbersPanel.setLayout(new BorderLayout());
         this.numbersPanel.add(polynomialsPanel, BorderLayout.CENTER);
-
         JPanel buttonsPanel = new JPanel(new GridLayout(3, 1, 10, 10));
         buttonsPanel.setBackground(new Color(220, 200, 250));
 
@@ -87,7 +85,6 @@ public class UserInterface extends JFrame implements ActionListener {
         customizeButton(divisionButton);
         customizeButton(derivationButton);
         customizeButton(integrationButton);
-
         buttonsPanel.add(this.addButton);
         buttonsPanel.add(this.subtractButton);
         buttonsPanel.add(this.multiplyButton);
@@ -132,13 +129,8 @@ public class UserInterface extends JFrame implements ActionListener {
                 System.out.println("Please enter both polynomials.");
             }
         if (source == derivationButton || source == integrationButton)
-        {
-            if (firstP.isEmpty()) {
-                System.out.println("Please enter the first polynomial.");
-            }
-            if(secondP.isEmpty())
-                System.out.println("Please enter the second polynomial.");
-        }
+            if (firstP.isEmpty() && secondP.isEmpty())
+                System.out.println("Please enter at least one polynomial.");
 
         if (source == addButton) {
             operationResult = operation.add(p1, p2);

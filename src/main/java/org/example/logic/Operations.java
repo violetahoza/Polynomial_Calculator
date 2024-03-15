@@ -92,7 +92,7 @@ public class Operations {
                     double newCoeff = currentCoeff + productCoeff;
                     if(newCoeff != 0)
                         product.getPolynomial().put(productPower, newCoeff);
-                    else product.getPolynomial().remove(power2);
+                    else product.getPolynomial().remove(power2); //if the new coefficient is 0, remove the monomial from the polynomial
                 } else product.addMonom(productPower, productCoeff);
             }
         }
@@ -124,13 +124,13 @@ public class Operations {
         }
 
         while (dividend.getPolynomial().size() >= divisor.getPolynomial().size()) {
-            // find the leading terms of the dividend and divisor
-            Map.Entry<Integer, Double> leadingTermDividend = dividend.getPolynomial().entrySet().iterator().next();
-            Map.Entry<Integer, Double> leadingTermDivisor = divisor.getPolynomial().entrySet().iterator().next();
+            // find the leading terms of the dividend and divisor (the terms with the greatest power)
+            Map.Entry<Integer, Double> leadDividend = dividend.getPolynomial().entrySet().iterator().next();
+            Map.Entry<Integer, Double> leadDivisor = divisor.getPolynomial().entrySet().iterator().next();
 
             // calculate the difference in powers and the coefficient of the quotient
-            int powerDifference = leadingTermDividend.getKey() - leadingTermDivisor.getKey();
-            double coeffQuotient = leadingTermDividend.getValue() / leadingTermDivisor.getValue();
+            int powerDifference = leadDividend.getKey() - leadDivisor.getKey();
+            double coeffQuotient = leadDividend.getValue() / leadDivisor.getValue();
 
             quotient.addMonom(powerDifference, coeffQuotient);// add the quotient term to the quotient polynomial
             Polynomial temp = new Polynomial();
