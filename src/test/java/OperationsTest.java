@@ -56,7 +56,10 @@ public class OperationsTest {
         p1 = p1.createPolynomialFromString("x^4");
         p2 = p2.createPolynomialFromString("x");
         ArrayList result = op.divide(p1, p2);
-        assertEquals (result, "Quotient: x^3 Remainder: 0");
+        Polynomial q = (Polynomial) result.getFirst();
+        Polynomial r = (Polynomial) result.getLast();
+        String expected = "Quotient: " + q.polynomialToString() + " Remainder: " + r.polynomialToString();
+        assertEquals (expected, "Quotient: x^3 Remainder: 0");
     }
 
     @Test
