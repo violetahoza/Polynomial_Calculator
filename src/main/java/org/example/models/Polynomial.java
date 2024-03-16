@@ -18,7 +18,14 @@ public class Polynomial {
         return polynomial;
     }
     public Integer maxPower() {
-        return Collections.max(polynomial.entrySet(), Map.Entry.comparingByKey()).getKey(); //return the order of the polynomial (the greatest power)
+        if (polynomial.isEmpty()) {
+            return 0; // Return 0 if the polynomial is empty
+        } else {
+            Integer power = Collections.max(polynomial.entrySet(), Map.Entry.comparingByKey()).getKey();
+            if (power != 0)
+                return power; // Return the order of the polynomial (the greatest power)
+            else return 0;
+        }
     }
 
     public void addMonom(int power, double coeff){ // method to add a new term (a monomial) to the polynomial
