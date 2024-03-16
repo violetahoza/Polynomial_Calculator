@@ -1,9 +1,6 @@
-package org.example;
+package org.example.application;
 import org.example.GUI.UserInterface;
-import org.example.logic.Operations;
-import org.example.models.Polynomial;
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class App {
     public static void main( String[] args )

@@ -2,9 +2,7 @@ import org.example.logic.Operations;
 import org.example.models.Polynomial;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +11,7 @@ public class OperationsFailed {
     public void addTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial(), sum = new Polynomial();
 
-        p1 = Polynomial.createPolynomialFromString("2x^2-3x+2");
+        p1 = Polynomial.createPolynomialFromString("2x^3-3x+2");
         p2 = Polynomial.createPolynomialFromString("x^3+3x");
         sum = Operations.add(p1, p2);
         String result = sum.polynomialToString();
@@ -37,12 +35,12 @@ public class OperationsFailed {
     public void multiplyTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial(), product = new Polynomial();
 
-        p1 = Polynomial.createPolynomialFromString("1");
+        p1 = Polynomial.createPolynomialFromString("x+1");
         p2 = Polynomial.createPolynomialFromString("x-1");
         product = Operations.multiply(p1, p2);
         String result = product.polynomialToString();
 
-        assertEquals (result, "x^2-1.0");
+        assertEquals (result, "x^2-2.0x+1.0");
     }
 
     @Test
@@ -77,6 +75,6 @@ public class OperationsFailed {
         derivative = Operations.derivative(p1);
         String result = derivative.polynomialToString();
 
-        assertEquals (result, "6.0-2.0");
+        assertEquals (result, "6.0x");
     }
 }

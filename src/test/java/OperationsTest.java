@@ -2,9 +2,7 @@ import org.example.logic.Operations;
 import org.example.models.Polynomial;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,24 +11,24 @@ public class OperationsTest {
     public void addTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial(), sum = new Polynomial();
 
-        p1 = Polynomial.createPolynomialFromString("2x^2-3x+2");
+        p1 = Polynomial.createPolynomialFromString("2x^5+x^3+2x^2-3x+2");
         p2 = Polynomial.createPolynomialFromString("x^3+3x");
         sum = Operations.add(p1, p2);
         String result = sum.polynomialToString();
 
-        assertEquals (result, "x^3+2.0x^2+2.0");
+        assertEquals (result, "2.0x^5+2.0x^3+2.0x^2+2.0");
     }
 
     @Test
     public void subtractTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial(), subtract = new Polynomial();
 
-        p1 = Polynomial.createPolynomialFromString("2x^2-3x+2");
-        p2 = Polynomial.createPolynomialFromString("x^3+3x");
+        p1 = Polynomial.createPolynomialFromString("9x^2-3x+2");
+        p2 = Polynomial.createPolynomialFromString("x^3+3x-7");
         subtract = Operations.subtract(p1, p2);
         String result = subtract.polynomialToString();
 
-        assertEquals (result, "-x^3+2.0x^2-6.0x+2.0");
+        assertEquals (result, "-x^3+9.0x^2-6.0x+9.0");
     }
 
     @Test
@@ -49,13 +47,13 @@ public class OperationsTest {
     public void divideTest(){
         Polynomial p1 = new Polynomial(), p2 = new Polynomial();
 
-        p1 = Polynomial.createPolynomialFromString("x^4");
+        p1 = Polynomial.createPolynomialFromString("3x^4+2x");
         p2 = Polynomial.createPolynomialFromString("x");
         ArrayList result = Operations.divide(p1, p2);
         Polynomial q = (Polynomial) result.getFirst();
         Polynomial r = (Polynomial) result.getLast();
         String expected = "Quotient: " + q.polynomialToString() + " Remainder: " + r.polynomialToString();
-        assertEquals (expected, "Quotient: x^3 Remainder: 0");
+        assertEquals (expected, "Quotient: 3.0x^3+2.0 Remainder: 0");
     }
 
     @Test

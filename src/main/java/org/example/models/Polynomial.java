@@ -1,8 +1,6 @@
 package org.example.models;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.*;
 
 import static java.lang.Double.parseDouble;
@@ -22,7 +20,9 @@ public class Polynomial {
 
     public void addMonom(int power, double coeff){ // method to add a new term (a monomial) to the polynomial
         if (polynomial.containsKey(power)) { //if there is already a monomial with the same power in the polynomial
-            polynomial.put(power, polynomial.get(power) + coeff); // update the value of the coefficient
+            if(polynomial.get(power) + coeff != 0) //if the new coefficient is not zero
+                polynomial.put(power, polynomial.get(power) + coeff); // update the value of the coefficient
+            else polynomial.remove(power); // if the coefficient is zero, remove the term
         } else polynomial.put(power, coeff);
     }
 
@@ -30,7 +30,7 @@ public class Polynomial {
         String string = ""; // the string in which I'll store the result
         boolean first = true; // I use it, so I don't have to display the + sign of the 1st term the polynomial
 
-        if(polynomial.isEmpty()) // if the polynomial is empty, we need to display 0
+        if(polynomial.isEmpty()) // if the polynomial is empty, I want to display 0
             return "0";
 
         for(Map.Entry<Integer, Double> entry : polynomial.entrySet()){ // iterate over the polynomial terms
@@ -77,7 +77,7 @@ public class Polynomial {
             if (term.contains("x")) { //if the term contains 'x'
                 String[] parts = term.split("x");
                 if (parts.length > 0) {
-                    if (parts[0].isEmpty()) coefficient = 1; //if the coefficient part is empty, set it to
+                    if (parts[0].isEmpty()) coefficient = 1; //if the coefficient part is empty, set it to 1
                     else if (parts[0].equals("-")) {
                         coefficient = -1;
                     } else if (parts[0].equals("+")) {
@@ -87,15 +87,11 @@ public class Polynomial {
                     }
                 } else if (parts.length == 0) coefficient = 1; // if term contains only 'x', set coefficient to 1
                 if (term.contains("^")) {
-                    power = Integer.parseInt(term.split("\\^")[1]); //extract power part
-                } else { //if the power part is not present
-                        power = 1;
-                    }
-                } else { // if the term doesn't contain 'x', parse it as a coefficient
-                    coefficient = parseDouble(term);
-                }
-                if (coefficient != 0) polynom.addMonom(power, coefficient);
-            }
+                    power = Integer.parseInt(term.split("\\^")[1]); //extract the power
+                } else power = 1; //if the power part is not present
+            } else coefficient = parseDouble(term); // if the term doesn't contain 'x', parse it as a coefficient
+            if (coefficient != 0) polynom.addMonom(power, coefficient);
+        }
         return polynom;
     }
 }

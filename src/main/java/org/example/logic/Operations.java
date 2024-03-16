@@ -4,36 +4,20 @@ import org.example.GUI.UserInterface;
 import org.example.models.Polynomial;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Operations {
     // method to add two polynomials
     public static Polynomial add(Polynomial p1, Polynomial p2) {
-        // initialize a polynomial to store the sum
-        Polynomial sum = new Polynomial();
+        Polynomial sum = new Polynomial(); // initialize a polynomial to store the sum
 
         // iterate over the entries of p1 and add them to the sum
         for(Map.Entry<Integer, Double> entry : p1.getPolynomial().entrySet()){
-            int power = entry.getKey();
-            double coeff = entry.getValue();
-            sum.addMonom(power, coeff);
+            sum.addMonom(entry.getKey(), entry.getValue());
         }
         // iterate over the entries of p2
         for(Map.Entry<Integer, Double> entry : p2.getPolynomial().entrySet()){
-            int power = entry.getKey();
-            double coeff =  entry.getValue();
-
-            // if the sum already contains a term with the same power, add the coefficients
-            if (sum.getPolynomial().containsKey(power)) {
-                double currentCoeff = sum.getPolynomial().get(power);
-                double newCoeff = currentCoeff + coeff;
-                if (newCoeff != 0) { // if the new coefficient is not zero, update the sum
-                    sum.getPolynomial().put(power, newCoeff);
-                } else sum.getPolynomial().remove(power); // if the coefficient is zero, remove the term
-            } else sum.addMonom(power, coeff);// if the sum doesn't contain a term with the same power, add the term
+            sum.addMonom(entry.getKey(), entry.getValue()); //the case when there already exists a term with the same power is treated in the method addMonom
         }
         //System.out.println(sum.polynomialToString(sum.getPolynomial()));;
         return sum;
@@ -41,37 +25,25 @@ public class Operations {
 
     // method to subtract two polynomials
     public static Polynomial subtract(Polynomial p1, Polynomial p2) {
-        Polynomial difference = new Polynomial();
+        Polynomial difference = new Polynomial();// initialize a polynomial to store the difference
         if(p1.equals(p2)){
             difference.addMonom(0, 0);
             return difference; // if p1 equals p2, return a zero polynomial
         }
-
         // iterate over the entries of p1 and add them to the difference
         for(Map.Entry<Integer, Double> entry : p1.getPolynomial().entrySet()){
-            int power = entry.getKey();
-            double coeff = entry.getValue();
-            difference.addMonom(power, coeff);
+            difference.addMonom(entry.getKey(), entry.getValue());
         }
+        // iterate over the entries of p2 and add them to the difference with sign - in front
         for(Map.Entry<Integer, Double> entry : p2.getPolynomial().entrySet()){
-            int power = entry.getKey();
-            double coeff = entry.getValue();
-
-            // if the difference already contains a term with the same power, subtract the coefficients
-            if (difference.getPolynomial().containsKey(power)) {
-                double currentCoeff = difference.getPolynomial().get(power);
-                double newCoeff = currentCoeff - coeff;
-                if (newCoeff != 0) { // if the new coefficient is not zero, update the difference
-                    difference.getPolynomial().put(power, newCoeff);
-                } else difference.getPolynomial().remove(power);// if the coefficient is zero, remove the term
-            } else difference.addMonom(power, -coeff);// if the difference doesn't contain a term with the same power, add the negated term
+            difference.addMonom(entry.getKey(), -entry.getValue()); //the case when there already exists a term with the same power is treated in the method addMonom
         }
         return difference; // return p1 - p2
     }
 
     //method to multiply two polynomials
     public static Polynomial multiply(Polynomial p1, Polynomial p2) {
-        Polynomial product = new Polynomial();
+        Polynomial product = new Polynomial();// initialize a polynomial to store the product
 
         for(Map.Entry<Integer, Double> entry1 : p1.getPolynomial().entrySet()) // iterate over the entries of p1
         {
@@ -83,27 +55,19 @@ public class Operations {
                 double coeff2 = entry2.getValue();
 
                 // compute the power and coefficient of the product term
-                int productPower = power1 + power2;
-                double productCoeff = coeff1 * coeff2;
+                int productPower = power1 + power2; //the powers are added
+                double productCoeff = coeff1 * coeff2; // the coefficients are multiplied
 
-                // if the product already contains a term with the same power, add the coefficients
-                if (product.getPolynomial().containsKey(productPower)) {
-                    double currentCoeff = product.getPolynomial().get(productPower);
-                    double newCoeff = currentCoeff + productCoeff;
-                    if(newCoeff != 0)
-                        product.getPolynomial().put(productPower, newCoeff);
-                    else product.getPolynomial().remove(power2); //if the new coefficient is 0, remove the monomial from the polynomial
-                } else product.addMonom(productPower, productCoeff);
+                product.addMonom(productPower, productCoeff); //the case when there already exists a term with the same power is treated in the method addMonom
             }
         }
         return product;
     }
     public static ArrayList<Polynomial> divide(Polynomial p1, Polynomial p2) {
-        // initialize a polynomial to store the quotient and one to store the dividend
-        Polynomial quotient = new Polynomial();
-        Polynomial dividend = new Polynomial();
-        Polynomial divisor = new Polynomial();
-        ArrayList<Polynomial> result = new ArrayList<Polynomial>();
+        Polynomial quotient = new Polynomial(); // initialize a polynomial to store the quotient
+        Polynomial dividend = new Polynomial(); // initialize a polynomial to store the dividend (at the end, it will contain the remainder)
+        Polynomial divisor = new Polynomial(); // initialize a polynomial to store the divisor
+        ArrayList<Polynomial> result = new ArrayList<Polynomial>();//the 1st element will be the quotient, the second will be the remainder
 
         if (p2.getPolynomial().isEmpty() || p2.getPolynomial().containsValue(0.0) || p1.getPolynomial().isEmpty() || p1.getPolynomial().containsValue(0.0)) {
             UserInterface userInterface = new UserInterface("Polynomial calculator");
@@ -138,7 +102,6 @@ public class Operations {
             Polynomial product = multiply(divisor, temp);// multiply the divisor by the quotient term
             dividend = subtract(dividend, product);// subtract the product from the dividend
         }
-        //String result = "Quotient: " + quotient.polynomialToString() + " Remainder: " + dividend.polynomialToString(); // construct the result string containing both quotient and remainder
         result.add(quotient);
         result.add(dividend);
         return result;
