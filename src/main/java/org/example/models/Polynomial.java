@@ -17,6 +17,9 @@ public class Polynomial {
     public Map<Integer, Double> getPolynomial() {
         return polynomial;
     }
+    public Integer maxPower() {
+        return Collections.max(polynomial.entrySet(), Map.Entry.comparingByKey()).getKey(); //return the order of the polynomial (the greatest power)
+    }
 
     public void addMonom(int power, double coeff){ // method to add a new term (a monomial) to the polynomial
         if (polynomial.containsKey(power)) { //if there is already a monomial with the same power in the polynomial

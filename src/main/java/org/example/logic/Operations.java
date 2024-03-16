@@ -15,7 +15,7 @@ public class Operations {
         for(Map.Entry<Integer, Double> entry : p1.getPolynomial().entrySet()){
             sum.addMonom(entry.getKey(), entry.getValue());
         }
-        // iterate over the entries of p2
+        // iterate over the entries of p2 and add them to the sum
         for(Map.Entry<Integer, Double> entry : p2.getPolynomial().entrySet()){
             sum.addMonom(entry.getKey(), entry.getValue()); //the case when there already exists a term with the same power is treated in the method addMonom
         }
@@ -34,7 +34,7 @@ public class Operations {
         for(Map.Entry<Integer, Double> entry : p1.getPolynomial().entrySet()){
             difference.addMonom(entry.getKey(), entry.getValue());
         }
-        // iterate over the entries of p2 and add them to the difference with sign - in front
+        // iterate over the entries of p2 and add them to the difference with the sign - in front
         for(Map.Entry<Integer, Double> entry : p2.getPolynomial().entrySet()){
             difference.addMonom(entry.getKey(), -entry.getValue()); //the case when there already exists a term with the same power is treated in the method addMonom
         }
@@ -69,17 +69,18 @@ public class Operations {
         Polynomial divisor = new Polynomial(); // initialize a polynomial to store the divisor
         ArrayList<Polynomial> result = new ArrayList<Polynomial>();//the 1st element will be the quotient, the second will be the remainder
 
-        if (p2.getPolynomial().isEmpty() || p2.getPolynomial().containsValue(0.0) || p1.getPolynomial().isEmpty() || p1.getPolynomial().containsValue(0.0)) {
+        if (p2.getPolynomial().isEmpty() || p2.getPolynomial().containsValue(0.0) || p1.getPolynomial().isEmpty() || p1.getPolynomial().containsValue(0.0)) // check if the polynomials are empty or zero
+        {
             UserInterface userInterface = new UserInterface("Polynomial calculator");
             userInterface.showErrorDialog("Division by zero is not allowed.");
-            throw new ArithmeticException("Division by zero is not allowed."); // check if the polynomials are empty or zero
+            throw new ArithmeticException("Division by zero is not allowed.");
         }
 
         // find the maximum power in both polynomials
         Integer kmax1 = Collections.max(p1.getPolynomial().entrySet(), Map.Entry.comparingByKey()).getKey();
         Integer kmax2 = Collections.max(p2.getPolynomial().entrySet(), Map.Entry.comparingByKey()).getKey();
 
-        if(kmax1 >= kmax2) {  // determine which polynomial will be used as the dividend based on the maximum powers
+        if(kmax1 >= kmax2) {  // determine which polynomial will be used as the dividend based on the maximum powers; the polynomial of the greatest order will be the dividend, and the other one will be the divisor
             dividend.getPolynomial().putAll(p1.getPolynomial());
             divisor.getPolynomial().putAll(p2.getPolynomial());
         } else {
@@ -87,7 +88,8 @@ public class Operations {
             divisor.getPolynomial().putAll(p1.getPolynomial());
         }
 
-        while (dividend.getPolynomial().size() >= divisor.getPolynomial().size()) {
+        while (dividend.maxPower() >= divisor.maxPower()) // as long as the order of the dividend is greater than the order of the divisor
+        {
             // find the leading terms of the dividend and divisor (the terms with the greatest power)
             Map.Entry<Integer, Double> leadDividend = Collections.max(dividend.getPolynomial().entrySet(), Map.Entry.comparingByKey());
             Map.Entry<Integer, Double> leadDivisor = Collections.max(divisor.getPolynomial().entrySet(), Map.Entry.comparingByKey());
