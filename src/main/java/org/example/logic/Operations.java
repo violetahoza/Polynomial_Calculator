@@ -71,8 +71,7 @@ public class Operations {
 
         if (p2.getPolynomial().isEmpty() || p2.getPolynomial().containsValue(0.0) || p1.getPolynomial().isEmpty() || p1.getPolynomial().containsValue(0.0)) // check if the polynomials are empty or zero
         {
-            UserInterface userInterface = new UserInterface("Polynomial calculator");
-            userInterface.showErrorDialog("Division by zero is not allowed.");
+            UserInterface.showErrorDialog("Division by zero is not allowed.");
             throw new ArithmeticException("Division by zero is not allowed.");
         }
 

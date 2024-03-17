@@ -190,10 +190,10 @@ public class UserInterface extends JFrame implements ActionListener {
     private void customizeTextField(JTextField textField) {
         textField.setFont(new Font("Arial", Font.ITALIC, 14));
     }
-    public void showErrorDialog(String message) {
+    public static void showErrorDialog(String message) {
         Font font = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("OptionPane.messageFont", font);
         UIManager.put("OptionPane.messageForeground", Color.RED);
-        JOptionPane.showMessageDialog(this, message, "Input Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Input Error", JOptionPane.ERROR_MESSAGE);
     }
 }
