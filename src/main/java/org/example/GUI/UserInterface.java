@@ -172,7 +172,7 @@ public class UserInterface extends JFrame implements ActionListener {
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
             // Check if the character is not 'x', '+', '-', a space, or a digit from 0 to 9
-            if (ch != 'x' && ch != '+' && ch != '^' && ch != '-' && ch != ' ' && !Character.isDigit(ch)) {
+            if (ch != 'x' && ch != '+' && ch != '^' && ch != '-' && ch != ' ' && ch != '.' && !Character.isDigit(ch)) {
                 return 0;
             }
         }

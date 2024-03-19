@@ -75,7 +75,7 @@ public class Polynomial {
 
     public static Polynomial createPolynomialFromString(String input) { //create a polynomial from a string representation
         Polynomial polynom = new Polynomial();
-        Pattern pattern = Pattern.compile("([+-]?(?:\\d+\\.?\\d*)?x\\^?\\d*|[+-]?\\d+\\.?\\d*)"); // define pattern to match polynomial terms
+        Pattern pattern = Pattern.compile("([+-]?(?:\\d+\\.?\\d*)?x\\^?\\d*|[+-]?\\d+\\.?\\d*)"); // define pattern to match polynomial terms; the first part (before |) matches a monomial, and the second part matches a number
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) { //iterate over the terms in the input string
