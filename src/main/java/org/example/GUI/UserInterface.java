@@ -44,8 +44,7 @@ public class UserInterface extends JFrame implements ActionListener {
         this.resultPanel = new JPanel(new BorderLayout());
         this.resultPanel.setBackground(new Color(220, 200, 250));
 
-        this.resultLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        this.resultLabel.setForeground(new Color(128, 0, 128));
+        customizeLabel(resultLabel);
         this.resultPanel.add(this.resultLabel, BorderLayout.NORTH);
 
         this.resultTextField = new JTextField();
