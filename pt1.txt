@@ -1,0 +1,9 @@
+class monomial{
+	int degree;
+	double coeff; 
+}
+
+hashtable - key = degree
+          - value = coeff
+
+Map<Integer, Double> polynom = new HashMap<Integer, Double>();
